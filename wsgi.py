@@ -8,15 +8,6 @@ def index():
 @application.route("/hello")
 def hello():
     return "Hello World!"
- 
-@application.route("/members")
-def members():
-    return "Members"
- 
-@application.route("/members/<string:name>/")
-def getMember(name):
-    return render_template(
-        'test.html',name=name)
 
 @application.route("/bar_chart")
 def getBarChart():
