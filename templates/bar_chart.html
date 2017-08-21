@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<head>
+    <title>Bar Charts</title>
+</head>
+
+<style>
+.bar {
+  fill: steelblue;
+}
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+</style>
+
+<svg class="chart"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script type="text/javascript">
+	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+  var xScale = d3.scaleBand()
+    .rangeRound([0, width])
+    .padding(0.1);
+  var xAxis = d3.axisBottom()
+    .scale(xScale);
+
+  var yScale = d3.scaleLinear()
+    .range([height, 0]);
+  var yAxis = d3.axisLeft()
+    .scale(yScale);
+
+	var chart = d3.select(".chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	d3.tsv("data/bar_chart", function(d) {
+    d.value = +d.value; // coerce to number
+    return d;
+  }, function(error, data) {
+
+    xScale.domain(data.map(function(d) { return d.name; }));
+    yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+    chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+    chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+
+    chart.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 3)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
+
+    var bar = chart.selectAll(".bar")
+      .data(data).enter()
+      .append("g")
+
+    bar.append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return xScale(d.name); })
+      .attr("y", function(d) { return yScale(d.value); })
+      .attr("height", function(d) { return height - yScale(d.value); })
+      .attr("width", xScale.bandwidth());
+
+    bar.append("text")
+      .attr("x", function(d) { return xScale(d.name) + xScale.bandwidth() / 2 - 3; })
+      .attr("y", function(d) { return yScale(d.value) + 10; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.value; });
+  })
+</script>
+
+</html>

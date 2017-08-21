@@ -17,6 +17,15 @@ def members():
 def getMember(name):
     return render_template(
         'test.html',name=name)
- 
+
+@application.route("/bar_chart")
+def getBarChart():
+	return render_template("bar_chart.html")
+
+@application.route("/data/bar_chart")
+def getBarChartData():
+	print(application.root_path)
+	return open(application.root_path + "/" + "data/bar_chart.tsv", "r").read()
+
 if __name__ == "__main__":
     application.run()
