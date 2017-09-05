@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>flocking bird</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+</head>
+<script type="text/javascript" src="{{ url_for('static', filename='processing.js') }}"></script>
+
+<body>
+	<p>Flocking Birds number = 50</p>
+	<!-- <canvas data-processing-sources="{{ url_for('static', filename='hello_web/gui.pde') }} {{ url_for('static', filename='hello_web/vector.pde') }} {{ url_for('static', filename='hello_web/creature.pde') }} {{ url_for('static', filename='hello_web/hello_web.pde') }}"></canvas> -->
+	<canvas data-processing-sources="{{ url_for('static', filename='proj2_flocking/proj2_flocking.pde') }} {{ url_for('static', filename='proj2_flocking/creature.pde') }} {{ url_for('static', filename='proj2_flocking/gui.pde') }} {{ url_for('static', filename='proj2_flocking/utilities.pde') }} {{ url_for('static', filename='proj2_flocking/vector.pde') }} "></canvas>
+</body>
+</html>
