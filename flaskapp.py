@@ -30,8 +30,12 @@ def getHeatMap2():
 	return open(app.root_path + "/" + "data/heatmap_2.tsv", "r").read()
 
 @app.route("/processing/flocking_bird")
-def testProcessing():
+def processingFlockingBird():
 	return render_template("flocking_bird.html")
+
+@app.route("/processing/diffusion")
+def processingDiffusion():
+	return render_template("diffusion.html")
 
 if __name__ == "__main__":
     app.run()

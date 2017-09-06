@@ -6,17 +6,10 @@ class Vector {
   void add(Vector other) {this.x += other.x; this.y += other.y; }
   void sub(Vector other) {this.x -= other.x; this.y -= other.y;}
   void mult(float a) {this.x *= a; this.y *= a;}
-  void divide(float a) {this.x /= a; this.y /= a; }
+  void div(float a) {this.x /= a; this.y /= a; }
   float norm(){return sqrt(sq(x) + sq(y)); }
-  void normalize() { 
-    float n = norm();
-    this.x /= n; 
-    this.y /= n;
-  }
-  void limit(float maxNorm) {
-    float n = norm();
-    if(n > maxNorm) divide(n / maxNorm);
-  }
+  void normalize() { float n = norm(); this.x /= n; this.y /= n; }
+  void limit(float maxNorm) { float n = norm(); if(n > maxNorm) div(n / maxNorm); }
 }
 
 
