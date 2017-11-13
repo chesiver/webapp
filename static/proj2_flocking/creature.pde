@@ -27,7 +27,7 @@ class CreatureList {
   public CreatureList(){}
   
   Creature[] creatures = new Creature[maxNum];
-  float delta_t = 1.0;
+  float delta_t = 0.5;
   float maxForce = 0.005;
   float maxSpeed = 0.05;
   int num = 0;

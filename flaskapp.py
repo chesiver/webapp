@@ -3,7 +3,7 @@ app = Flask(__name__)
  
 @app.route("/")
 def index():
-    return "Index!"
+    return render_template("index.html")
  
 @app.route("/hello")
 def hello():
@@ -36,6 +36,10 @@ def processingFlockingBird():
 @app.route("/processing/diffusion")
 def processingDiffusion():
 	return render_template("diffusion.html")
+
+@app.route("/processing/circle_composition")
+def processingCircleComposition():
+	return render_template("circle_composition.html")
 
 if __name__ == "__main__":
     app.run()
